@@ -1,0 +1,333 @@
+openapi: 3.0.0
+info:
+  title: 4Devs API
+  description: |
+    API para geração de diversos tipos de documentos e dados brasileiros, incluindo informações pessoais, endereços, documentos oficiais e mais.
+    
+    Esta API expõe um único endpoint que aceita requisições POST, onde a ação específica é determinada pelo parâmetro `acao` enviado no corpo da requisição.
+  version: "1.0.0"
+  contact:
+    name: 4Devs
+    url: https://www.4devs.com.br
+servers:
+  - url: https://www.4devs.com.br
+    description: Servidor Principal
+paths:
+  /ferramentas_online.php:
+    post:
+      summary: Ferramentas online para geração de dados
+      description: |
+        Endpoint único para acessar todas as funcionalidades da API 4Devs. O parâmetro 'acao' determina qual ferramenta será utilizada.
+      tags:
+        - Ferramentas
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/GeradorPessoaRequest'
+                - $ref: '#/components/schemas/CarregarCidadesRequest'
+                - $ref: '#/components/schemas/GeradorCertidaoRequest'
+                - $ref: '#/components/schemas/GeradorCNHRequest'
+                - $ref: '#/components/schemas/GeradorPISRequest'
+                - $ref: '#/components/schemas/GeradorTituloEleitorRequest'
+      responses:
+        '200':
+          description: Operação realizada com sucesso
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/GeradorPessoaResponse'
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CarregarCidadesResponse'
+                  - $ref: '#/components/schemas/GeradorCertidaoResponse'
+                  - $ref: '#/components/schemas/GeradorCNHResponse'
+                  - $ref: '#/components/schemas/GeradorPISResponse'
+                  - $ref: '#/components/schemas/GeradorTituloEleitorResponse'
+              examples:
+                carregarCidades:
+                  value: |
+                    <option value=""></option>
+                    <option value="8319">Abdon Batista</option>
+                    <option value="8320">Abelardo Luz</option>
+                    <option value="8321">Agrolândia</option>
+                certidao:
+                  value: "294303 01 55 2015 1 23846 633 7312880-50"
+                cnh:
+                  value: "74700162719"
+                pis:
+                  value: "629.87968.36-0"
+                tituloEleitor:
+                  value: "202681730949"
+
+components:
+  schemas:
+    # Definições de schemas para requisições
+    GeradorPessoaRequest:
+      type: object
+      required:
+        - acao
+        - sexo
+        - txt_qtde
+      properties:
+        acao:
+          type: string
+          description: Ação a ser executada.
+          enum: [gerar_pessoa]
+        sexo:
+          type: string
+          description: Define o sexo da pessoa.
+          enum: [H, M, I]
+          default: I
+          example: I
+        pontuacao:
+          type: string
+          description: Define se os documentos terão pontuação.
+          enum: [S, N]
+          default: N
+          example: S
+        idade:
+          type: integer
+          description: A idade da pessoa a ser gerada. O valor "0" (zero) gera uma idade aleatória.
+          example: 0
+          default: 0
+        cep_estado:
+          type: string
+          description: |
+            UF do estado para gerar o endereço. 
+            Não pode estar vazio caso o campo "cep_cidade" esteja preenchido.
+            Não preencher para gerar cidades aleatórias de diferentes Estados.
+          enum: [AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MS, MT, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO]
+          example: SC
+        txt_qtde:
+          type: integer
+          description: Quantidade de pessoas a serem geradas. Deve ser um valor entre 1 e 30.
+          minimum: 1
+          maximum: 30
+          example: 5
+          default: 1
+        cep_cidade:
+          type: integer
+          description: |
+            Cidade associada a UF, valor desse campo se refere ao código da cidade no 4Devs.
+            O não preenchimento resulta em um valor aleatório. 
+            O valor deve ser recuperado na chamada de carregar código de cidades.
+          example: 8452
+
+    CarregarCidadesRequest:
+      type: object
+      required:
+        - acao
+        - cep_estado
+      properties:
+        acao:
+          type: string
+          description: Ação a ser executada.
+          enum: [carregar_cidades]
+        cep_estado:
+          type: string
+          description: UF do estado.
+          enum: [AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MS, MT, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO]
+          example: SC
+
+    GeradorCertidaoRequest:
+      type: object
+      required:
+        - acao
+      properties:
+        acao:
+          type: string
+          description: Ação a ser executada.
+          enum: [gerador_certidao]
+        pontuacao:
+          type: string
+          description: Define se o número terá pontuação.
+          enum: [S, N]
+          default: N
+          example: S
+        tipo_certidao:
+          type: string
+          description: O tipo de certidão a ser gerada.
+          enum: [nascimento, casamento, casamento_religioso, obito, Indiferente]
+          default: Indiferente
+          example: Indiferente
+
+    GeradorCNHRequest:
+      type: object
+      required:
+        - acao
+      properties:
+        acao:
+          type: string
+          description: Ação a ser executada.
+          enum: [gerar_cnh]
+
+    GeradorPISRequest:
+      type: object
+      required:
+        - acao
+      properties:
+        acao:
+          type: string
+          description: Ação a ser executada.
+          enum: [gerar_pis]
+        pontuacao:
+          type: string
+          description: Define se o número terá pontuação.
+          enum: [S, N]
+          default: N
+          example: S
+
+    GeradorTituloEleitorRequest:
+      type: object
+      required:
+        - acao
+      properties:
+        acao:
+          type: string
+          description: Ação a ser executada.
+          enum: [gerar_titulo_eleitor]
+        estado:
+          type: string
+          description: UF do estado para o título. Opcional.
+          enum: [AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MS, MT, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO]
+          example: SC
+
+    # Definições de schemas para respostas
+    Pessoa:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: "Guilherme Danilo Peixoto"
+        idade:
+          type: integer
+          example: 72
+        cpf:
+          type: string
+          example: "985.184.119-63"
+        rg:
+          type: string
+          example: "26.895.316-8"
+        data_nasc:
+          type: string
+          example: "20/05/1953"
+        sexo:
+          type: string
+          example: "Masculino"
+        signo:
+          type: string
+          example: "Touro"
+        mae:
+          type: string
+          example: "Gabriela Aline Fátima"
+        pai:
+          type: string
+          example: "Thiago Igor Peixoto"
+        email:
+          type: string
+          example: "guilherme_peixoto@tecsysbrasil.com.br"
+        senha:
+          type: string
+          example: "dju8YADWGo"
+        cep:
+          type: string
+          example: "89518-971"
+        endereco:
+          type: string
+          example: "Rua Dona Maria Mendes 416"
+        numero:
+          type: integer
+          example: 390
+        bairro:
+          type: string
+          example: "Centro"
+        cidade:
+          type: string
+          example: "Macieira"
+        estado:
+          type: string
+          example: "SC"
+        telefone_fixo:
+          type: string
+          example: "(49) 3853-1858"
+        celular:
+          type: string
+          example: "(49) 99990-7734"
+        altura:
+          type: string
+          example: "1,89"
+        peso:
+          type: integer
+          example: 97
+        tipo_sanguineo:
+          type: string
+          example: "O-"
+        cor:
+          type: string
+          example: "vermelho"
+
+    GeradorPessoaResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Pessoa'
+      example:
+        - nome: "Guilherme Danilo Peixoto"
+          idade: 72
+          cpf: "985.184.119-63"
+          rg: "26.895.316-8"
+          data_nasc: "20/05/1953"
+          sexo: "Masculino"
+          signo: "Touro"
+          mae: "Gabriela Aline Fátima"
+          pai: "Thiago Igor Peixoto"
+          email: "guilherme_peixoto@tecsysbrasil.com.br"
+          senha: "dju8YADWGo"
+          cep: "89518-971"
+          endereco: "Rua Dona Maria Mendes 416"
+          numero: 390
+          bairro: "Centro"
+          cidade: "Macieira"
+          estado: "SC"
+          telefone_fixo: "(49) 3853-1858"
+          celular: "(49) 99990-7734"
+          altura: "1,89"
+          peso: 97
+          tipo_sanguineo: "O-"
+          cor: "vermelho"
+
+    CarregarCidadesResponse:
+      type: string
+      description: Lista de opções HTML com as cidades do estado.
+      example: |
+        <option value=""></option>
+        <option value="8319">Abdon Batista</option>
+        <option value="8320">Abelardo Luz</option>
+        <option value="8321">Agrolândia</option>
+
+    GeradorCertidaoResponse:
+      type: string
+      description: Número de certidão gerado.
+      example: "294303 01 55 2015 1 23846 633 7312880-50"
+
+    GeradorCNHResponse:
+      type: string
+      description: Número de CNH gerado.
+      example: "74700162719"
+
+    GeradorPISResponse:
+      type: string
+      description: Número de PIS gerado.
+      example: "629.87968.36-0"
+
+    GeradorTituloEleitorResponse:
+      type: string
+      description: Número de Título de Eleitor gerado.
+      example: "202681730949"
+
+tags:
+  - name: Ferramentas
+    description: Ferramentas disponíveis na API 4Devs
