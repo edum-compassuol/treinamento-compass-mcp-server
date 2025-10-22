@@ -14,6 +14,8 @@
 - **AI Assistant Integration**: Enhanced product vision to emphasize AI Code Assistant integration gap
 - **Brazilian UF Resource**: Documented complete Brazilian Federal Units resource architecture
 - **Comprehensive Documentation**: Enhanced all memory bank files with detailed technical specifications
+- **Testing Guide Addition**: Created comprehensive testing-guide.md with npm and Docker testing procedures
+- **Project Prompts**: Added prompts.md file with complete MCP server creation, enhancement, and deployment workflows
 
 ## Current State
 
@@ -53,11 +55,21 @@
 
 - **README.md**: Minimal (needs comprehensive documentation)
 - **4Devs_OpenAPI.yaml**: Complete OpenAPI 3.0 specification
-- **Memory Bank**: Complete with all core files and technical specifications
+- **prompts.md**: Complete workflow documentation for MCP server creation, enhancement, and deployment
+- **Memory Bank**: Complete with all core files and comprehensive testing guide
+  - **testing-guide.md**: Comprehensive testing procedures for npm and Docker deployments
+  - **All core files**: product.md, architecture.md, tech.md, context.md, brief.md, api_documentation.md
 - **Source Code**: Not implemented yet
 - **Tests**: Not implemented yet
 - **Configuration**: Not implemented yet
 
 ## Ready for Implementation
 
-The project now has complete architecture documentation, OpenAPI specifications, MCP Inspector testing strategies, and Brazilian UF resource definitions. All technical decisions are documented, and the implementation can proceed following the MCP development protocol.
+The project now has complete architecture documentation, OpenAPI specifications, MCP Inspector testing strategies, Brazilian UF resource definitions, and comprehensive testing procedures. All technical decisions are documented, including detailed workflows for creation, enhancement, deployment, and testing. The implementation can proceed following the MCP development protocol with full testing coverage for both npm and Docker deployment methods.
+
+## Additional Resources Available
+
+- **Complete Workflow Documentation**: prompts.md provides step-by-step instructions for MCP server creation, enhancement, and deployment
+- **Testing Procedures**: testing-guide.md offers comprehensive testing roadmap for both npm package and Docker image validation
+- **Deployment Guidelines**: Includes GitHub Actions workflows, package.json configuration, and .npmrc setup
+- **Docker Integration**: Complete Dockerfile example and container testing procedures
