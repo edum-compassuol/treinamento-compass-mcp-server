@@ -4,16 +4,20 @@
 
 Brazilian software developers and QA teams face a critical challenge: generating realistic, valid Brazilian documents and personal data for testing applications. Current solutions are fragmented, requiring manual data entry or unreliable generators that produce invalid formats.
 
-The 4Devs web service provides excellent document generation capabilities, but accessing it requires manual web interaction or complex API integration. This creates friction in development workflows and testing automation.
+The 4Devs web service provides excellent document generation capabilities, but accessing it requires manual web interaction or complex API integration. **The main issue is the lack of integration between the 4Devs portal and its functionalities with AI Code Assistants**, creating a significant gap in modern development workflows where AI tools are increasingly central to the development process.
+
+This creates friction in development workflows, testing automation, and prevents AI-assisted development tools from accessing Brazilian-specific test data generation capabilities.
 
 ## Problems It Solves
 
 ### Primary Problems
 
+- **AI Assistant Integration Gap**: No way for AI Code Assistants to access 4Devs functionality directly
 - **Testing Data Gap**: Lack of realistic Brazilian test data with valid document formats
 - **Manual Process**: Developers manually visit 4Devs website to generate test data
 - **Integration Complexity**: No standardized way to integrate 4Devs API into development tools
 - **Workflow Disruption**: Context switching between development environment and web browser
+- **AI Development Limitation**: AI tools cannot generate Brazilian-compliant test data without this integration
 
 ### Secondary Problems
 
@@ -70,6 +74,8 @@ The 4Devs web service provides excellent document generation capabilities, but a
 - 100% compatibility with 4Devs API response formats
 - Error handling for all edge cases
 - Comprehensive logging for debugging
+- **Brazilian UF Resource**: Provision of a complete list of Brazilian Federal Units (states) in two-character format
+- **Comprehensive Documentation**: Detailed README.md file with complete application information and usage examples
 
 ### User Success
 
