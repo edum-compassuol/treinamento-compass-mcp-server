@@ -2,6 +2,10 @@
 
 Follow the rules below to develop any code related.
 
+## Terminal Use
+
+Only use terminal commands for CMD/PowerShell this is a Windows OS.
+
 ## Dockerfile example
 
 Follow the example below to create Dockerfiles for MCP Servers.
