@@ -2,7 +2,10 @@
   "mcpServers": {
     "context7": {
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"],
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
       "env": {
         "DEFAULT_MINIMUM_TOKENS": ""
       }
@@ -37,7 +40,10 @@
         "--rm",
         "mcp/fetch"
       ],
-      "type": "stdio"
+      "type": "stdio",
+      "alwaysAllow": [
+        "fetch"
+      ]
     }
   }
 }
