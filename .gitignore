@@ -1,1 +1,5 @@
 .vscode
+4devs-mcp-server/.git 
+4devs-mcp-server/.vscode
+node_modules/
+build/
