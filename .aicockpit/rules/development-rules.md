@@ -15,3 +15,4 @@ Use these rules document to guide the development and deployment of MCP Servers 
 - Always follow best practices for Node.js and TypeScript development.
 - Always use semantic versioning for the MCP Server.
 - Always commit changes with clear and descriptive messages.
+- Never read and always ignore the content of the file with the name prompts.md in the MCP Server repository.
