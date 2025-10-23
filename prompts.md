@@ -11,7 +11,7 @@ Para construir o MCP Server, utilize os seguintes passos:
 2. Leia atentamente a documentação oficial da criação de MCP Server com Typescript: @https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/refs/heads/main/README.md
 3. Com essas informações em mãos construa o servidor MCP, nomeando ele como "4devs-mcp-server".
 4. Teste o MCP Server criado, utilizando o Inspector do MCP Server, conforme a documentação oficial: @https://github.com/modelcontextprotocol/inspector
-5. Ao final, comite o código do MCP Server recém criado.
+5. Ao final, crie um repositório git local com o código do MCP Server recém criado e comite o código.
 
 ## Prompt Avançado
 
