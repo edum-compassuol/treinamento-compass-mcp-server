@@ -7,9 +7,9 @@ Ele gera um conjunto completo de dados para uma ou mais pessoas, incluindo nome,
 
 Para construir o MCP Server, utilize os seguintes passos:
 
-1. Leia atentamente a documentação da API para o serviço:@4devs-openapi.yaml
+1. Leia atentamente a documentação da API para o serviço: @4devs-openapi.yaml
 2. Leia atentamente a documentação oficial da criação de MCP Server com Typescript: @https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/refs/heads/main/README.md
-3. Com essas informações em mãos construa o servidor MCP, nomeando ele como "4devs-mcp-server".
+3. Com essas informações em mãos construa o servidor MCP, nomeando ele como "4devs-mcp-server" em uma nova pasta.
 4. Teste o MCP Server criado, utilizando o Inspector CLI do MCP Server, conforme a documentação oficial: @https://github.com/modelcontextprotocol/inspector
 5. Ao final, crie um repositório git local com o código do MCP Server recém criado e comite o código.
 
